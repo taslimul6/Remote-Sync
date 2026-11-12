@@ -1,9 +1,76 @@
-<!-- BEGIN:nextjs-agent-rules -->
+# Remote-Sync — Agent Guide
 
-## This is NOT the Next.js you know
+## Project Overview
 
-This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` (resolved from this file's directory; in monorepos the `next` package may not be visible from the repo root) before writing any code. Heed deprecation notices.
+**Remote-Sync** is a Next.js 16 job discovery platform with a dark-themed UI. It connects job seekers with curated opportunities through a modern, responsive interface.
 
-This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
+## Tech Stack
 
-<!-- END:nextjs-agent-rules -->
+- **Framework**: Next.js 16.4.6 (App Router, React 19)
+- **Styling**: Tailwind CSS 4.3 with Turbopack
+- **UI Components**: shadcn/ui (base-nova style) + custom components
+- **Icons**: lucide-react
+- **Language**: TypeScript 5.x
+
+## Project Structure
+
+```
+app/                    # Next.js App Router
+├── layout.tsx          # Root layout with fonts
+├── page.tsx            # Home page
+└── globals.css         # Global Tailwind styles
+
+components/
+├── shared/             # Reusable across pages
+│   └── navbar.tsx      # Navbar, NavbarBrand, NavbarNav, NavbarLink, NavbarButton
+├── homePage/           # Home page-specific components
+│   ├── hero.tsx        # HeroSection, HeroBadge, HeroTitle, HeroDescription, HeroSearch, HeroTrending
+│   └── jobs.tsx        # JobsSection, JobCard, JobBadge
+└── ui/                 # shadcn/ui primitives
+    ├── badge.tsx
+    ├── button.tsx
+    └── card.tsx
+
+lib/
+└── utils.ts            # cn() utility (clsx + tailwind-merge)
+```
+
+## Commands
+
+```bash
+npm run dev      # Start dev server
+npm run build    # Production build
+npm run lint     # ESLint
+```
+
+## Key Conventions
+
+- Components are organized by scope: `shared/` for cross-page, `homePage/` for page-specific
+- Use `@/` alias for imports (maps to project root)
+- All interactive components use `"use client"` directive
+- Tailwind classes follow shadcn/ui patterns with CSS variables for theming
+- Component files use named exports, no default exports (except pages)
+
+## Dependencies
+
+- `next`, `react`, `react-dom` — Core framework
+- `tailwindcss`, `@tailwindcss/turbopack` — Styling
+- `clsx`, `tailwind-merge` — Class name utilities
+- `lucide-react` — Icon library
+- `@base-ui/react` — Headless UI primitives (used by shadcn)
+- `class-variance-authority` — Variant styling
+
+## Pages
+
+### Home (`/`)
+- Navbar (shared)
+- Hero section with search form and trending jobs
+- Jobs grid with 6 sample job cards
+- Dark theme with purple/blue accent colors
+
+## Agent Rules
+
+- This is Next.js 16 — check `node_modules/next/dist/docs/` before using unfamiliar APIs
+- Do not add comments to code unless requested
+- Follow existing component patterns when adding new ones
+- Keep components simple and single-purpose

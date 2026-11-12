@@ -1,6 +1,24 @@
-import { Navbar, NavbarBrand, NavbarNav, NavbarLink, NavbarButton } from "@/components/navbar";
+import { Navbar, NavbarBrand, NavbarNav, NavbarLink, NavbarButton } from "@/components/shared/navbar";
+import {
+  HeroSection,
+  HeroBadge,
+  HeroTitle,
+  HeroDescription,
+  HeroSearch,
+  HeroTrending,
+} from "@/components/homePage/hero";
+import { JobsSection } from "@/components/homePage/jobs";
+import PricingSection from "@/components/homePage/Pricing";
+import CtaSection from "@/components/homePage/cta";
+import Footer from "@/components/shared/footer";
 
 export default function Home() {
+  const trending = [
+    "Product Designer",
+    "AI Engineering",
+    "Dev-ops Engineer",
+  ];
+
   return (
     <div className="flex flex-col flex-1 min-h-screen bg-background font-sans">
       <Navbar>
@@ -24,33 +42,29 @@ export default function Home() {
         </div>
       </Navbar>
 
-      <main className="flex flex-1 w-full max-w-7xl mx-auto flex-col items-center justify-center py-16 px-4">
-        <div className="flex flex-col items-center gap-6 text-center">
-          <h1 className="max-w-xs text-4xl font-bold leading-tight tracking-tight text-foreground">
-            Welcome to{" "}
-            <code className="rounded bg-muted px-2 py-1 font-mono text-sm">
-              RemoteSync
-            </code>
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-muted-foreground">
-            A simple navbar component built with Tailwind CSS.
-          </p>
-        </div>
-        <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
-          <a
-            href="#"
-            className="flex h-12 items-center justify-center gap-2 rounded-lg bg-primary px-6 text-primary-foreground text-sm font-medium transition-colors hover:bg-primary/90"
-          >
-            View Components
-          </a>
-          <a
-            href="#"
-            className="flex h-12 items-center justify-center gap-2 rounded-lg border border-border bg-background px-6 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
+      <HeroSection>
+        <HeroBadge>
+          <span className="text-sm">💼</span>
+          <span className="text-[11px] font-bold tracking-wider text-white">50,000+</span>
+          <span className="text-[10px] tracking-wider text-white/50">NEW JOBS THIS MONTH</span>
+        </HeroBadge>
+
+        <HeroTitle>Find Your Dream Job Today</HeroTitle>
+
+        <HeroDescription>
+          HireLoop connects top talent with world-class companies. Browse thousands of curated
+          opportunities and land your next role — faster.
+        </HeroDescription>
+
+        <HeroSearch />
+
+        <HeroTrending items={trending} />
+      </HeroSection>
+
+      <JobsSection />
+      <PricingSection />
+      <CtaSection />
+      <Footer />
     </div>
   );
 }
